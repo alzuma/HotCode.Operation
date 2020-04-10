@@ -1,3 +1,4 @@
+using HotCode.System.Messaging.RedisMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ namespace HotCode.Operation
         {
             services.AddServiceLocator<Program>();
             services.AddControllers();
+            services.AddRedisMessaging();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -32,6 +34,8 @@ namespace HotCode.Operation
             app.UseRouting();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            app.UseRedisMessaging();
         }
     }
 }
