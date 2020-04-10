@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServiceLocator;
 
 namespace HotCode.Operation
 {
@@ -17,6 +18,7 @@ namespace HotCode.Operation
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddServiceLocator<Program>();
             services.AddControllers();
         }
 
@@ -27,11 +29,7 @@ namespace HotCode.Operation
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
